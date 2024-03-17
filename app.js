@@ -17,8 +17,8 @@ app.use(bodyParser.json({ limit: "1000mb" }));
 app.use(bodyParser.urlencoded({ limit: "1000mb", extended: true }));
 app.use(cors());
 
-app.use("/images", express.static("image_data"));
-app.use("/reports", express.static("reports_data"));
+app.use("/images", express.static("images"));
+app.use("/reports", express.static("reports"));
 
 db.sequelize
   .sync({

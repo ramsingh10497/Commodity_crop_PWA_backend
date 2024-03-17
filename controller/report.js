@@ -16,8 +16,8 @@ try {
 }
 
 try {
-  if (!fs.existsSync("./reports_data")) {
-    fs.mkdirSync("./reports_data");
+  if (!fs.existsSync("./reports")) {
+    fs.mkdirSync("./reports");
   }
 } catch (err) {
   console.error(err);
@@ -49,7 +49,7 @@ const generatePdf = async ({ result, path }) => {
   return new Promise((resolve, reject) => {
     try {
       const doc = new PDFDocument();
-      const pdf_path = `reports_data/${Date.now()}.pdf`;
+      const pdf_path = `reports/${Date.now()}.pdf`;
       doc.pipe(fs.createWriteStream(pdf_path));
       doc.fontSize(27).text(result, 100, 100);
 
@@ -146,11 +146,7 @@ const getAllReports = async (req, res) => {
           as: "crop",
           required: true,
         },
-        {
-          model: Users,
-          as: "user",
-          required: true,
-        },
+        { model: Users, as: "user", required: true },
       ],
     });
     if (reports.length > 0) {
